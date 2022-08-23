@@ -1,4 +1,4 @@
-# Skyly Android SDK
+# Farly Android SDK
 
 [![Version](https://jitpack.io/v/farly-sdk/farly-android-sdk.svg)](https://jitpack.io/#farly-sdk/farly-android-sdk)
 
