@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="com.farly.farly">
+
+        <application>
+            <activity
+                android:name=".FarlyWebAppActivity"
+                android:exported="false"
+                android:theme="@style/NoActionBar" />
+        </application>
+
+    </manifest>
