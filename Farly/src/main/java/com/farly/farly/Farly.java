@@ -38,7 +38,7 @@ public class Farly {
 
     private String apiKey;
     private String apiDomain = "www.mob4pass.com";
-    private String offerwallDomain = "www.mob4pass.com";
+    private String offerwallDomain = "offerwall.farly.io";
     private String publisherId;
 
     private Farly() {
@@ -61,7 +61,7 @@ public class Farly {
     }
 
     private enum Endpoint {
-        API_FEED_V2("/api/feed/v2"), HOSTED_WALL("/wall");
+        API_FEED_V2("/api/feed/v2"), HOSTED_WALL("/offers");
 
         private final String endpoint;
 
@@ -287,6 +287,18 @@ public class Farly {
     @SuppressWarnings("UnusedReturnValue")
     public Farly setPublisherId(String publisherId) {
         this.publisherId = publisherId;
+        return this;
+    }
+
+    @SuppressWarnings("UnusedReturnValue")
+    public Farly setApiDomain(String apiDomain) {
+        this.apiDomain = apiDomain;
+        return this;
+    }
+
+    @SuppressWarnings("UnusedReturnValue")
+    public Farly setOfferwallDomain(String offerwallDomain) {
+        this.offerwallDomain = offerwallDomain;
         return this;
     }
 }
