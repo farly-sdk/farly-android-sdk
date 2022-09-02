@@ -103,7 +103,7 @@ public class Farly {
     /**
      * Return the formatted OfferWall url.
      * Convenient if you want to display the offer wall in your own webview
-     * Warning: do not call this from the main thread, it will crash.
+     * Warning: do not call this from the main thread, it will crash. Use getHostedOfferWallUrlFromMainThread if needed
      *
      * @param context
      * @param request
@@ -113,6 +113,40 @@ public class Farly {
     @WorkerThread
     public String getHostedOfferWallUrl(Context context, OfferWallRequest request) throws Exception {
         return this.getUrl(context, request, Endpoint.HOSTED_WALL);
+    }
+
+    public interface OfferWallUrlCompletionHandler {
+        /**
+         * Called with url when request is done.
+         *
+         * @param url the url you can use in your own webview
+         */
+        void onComplete(String url);
+
+        void onError(Exception e);
+    }
+
+    /**
+     * Get the formatted OfferWall url in background, and call the completionHandler when done
+     * Convenient if you want to display the offer wall in your own webview
+     * Unlike getHostedOfferWallUrl, you can call this method from the main thread.
+     *
+     * @param context
+     * @param request
+     * @param handler
+     */
+    public void getHostedOfferWallUrlFromMainThread(Context context, OfferWallRequest request, OfferWallUrlCompletionHandler handler) {
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    String url = Farly.this.getUrl(context, request, Endpoint.HOSTED_WALL);
+                    handler.onComplete(url);
+                } catch (Exception e) {
+                    handler.onError(e);
+                }
+            }
+        }.start();
     }
 
     public enum OfferWallPresentationMode {

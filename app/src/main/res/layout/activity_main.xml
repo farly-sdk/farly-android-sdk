@@ -24,11 +24,17 @@
             android:text="Get offers programmatically" />
 
         <Button
-            android:id="@+id/copyUrl"
+            android:id="@+id/copyUrlInNewThread"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="copyUrl"
-            android:text="Copy offer wall url" />
+            android:onClick="copyUrlInNewThread"
+            android:text="Copy offer wall url (in bg thread)" />
+        <Button
+            android:id="@+id/copyUrlFromMainThread"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="copyUrlFromMainThread"
+            android:text="Copy offer wall url (from main thread)" />
 
         <Button
             android:id="@+id/openBrowser"

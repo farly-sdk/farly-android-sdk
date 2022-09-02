@@ -64,29 +64,47 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
-    public void copyUrl(View view) {
+    private void copyToClipboard(String toCopy) {
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("OfferWall", toCopy);
+        clipboard.setPrimaryClip(clip);
+
+        MainActivity.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), "Copied to clipboard: " + toCopy, Toast.LENGTH_LONG)
+                        .show();
+            }
+        });
+    }
+
+    public void copyUrlInNewThread(View view) {
         new Thread() {
             @Override
             public void run() {
                 try {
                     String url = Farly.getInstance().getHostedOfferWallUrl(getApplicationContext(), request);
                     Log.d("Farly", "Use the url in your own webview: " + url);
-                    ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText("OfferWall", url);
-                    clipboard.setPrimaryClip(clip);
-
-                    MainActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(), "Copied to clipboard: " + url, Toast.LENGTH_LONG)
-                                    .show();
-                        }
-                    });
+                    copyToClipboard(url);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }.start();
+    }
+
+    public void copyUrlFromMainThread(View view) {
+        Farly.getInstance().getHostedOfferWallUrlFromMainThread(getApplicationContext(), request, new Farly.OfferWallUrlCompletionHandler() {
+            @Override
+            public void onComplete(String url) {
+                copyToClipboard(url);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public void openBrowser(View view) {
