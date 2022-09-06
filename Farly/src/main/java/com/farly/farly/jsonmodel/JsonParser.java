@@ -26,7 +26,7 @@ public class JsonParser {
             if (feedItem == null) {
                 continue;
             }
-            items.add(parseFeedItem(object));
+            items.add(feedItem);
         }
 
         return items;
