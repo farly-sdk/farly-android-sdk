@@ -272,6 +272,8 @@ public class Farly {
             queryParams.put("user_signup_timestamp", Math.round(request.getUserSignupDate().getTime() / 1000f) + "");
         }
 
+        queryParams.put("from", "wallv2");
+
         String[] callbackParameters = request.getCallbackParameters();
         if (callbackParameters != null) {
             for (int i = 0; i < callbackParameters.length; i++) {
