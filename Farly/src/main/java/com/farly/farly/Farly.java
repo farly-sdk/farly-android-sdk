@@ -37,7 +37,7 @@ public class Farly {
     public static final String LOG_TAG = "Farly";
 
     private String apiKey;
-    private String apiDomain = "www.mob4pass.com";
+    private String apiDomain = "www.farly.io";
     private String offerwallDomain = "offerwall.farly.io";
     private String publisherId;
 
