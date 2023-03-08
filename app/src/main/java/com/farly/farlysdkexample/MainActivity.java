@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         this.request = new OfferWallRequestBuilder()
                 .setUserId("YOUR_USER_ID")
                 .setZipCode("75017") // optional
+                .setCountryCode("FR") // optional, if not set will default to the device's default country
                 .setUserAge(31) //optional
                 .setUserGender(Gender.MALE) //optional
                 .setUserSignupDate(new GregorianCalendar(2018, 0, 13).getTime())
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("OfferWall", toCopy);
         clipboard.setPrimaryClip(clip);
+        Log.d("Farly", "Copied " + toCopy);
 
         MainActivity.this.runOnUiThread(new Runnable() {
             @Override

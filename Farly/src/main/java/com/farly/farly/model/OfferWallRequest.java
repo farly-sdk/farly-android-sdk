@@ -11,6 +11,8 @@ public class OfferWallRequest {
     @Nullable
     private String zipCode;
     @Nullable
+    private String countryCode;
+    @Nullable
     private Integer userAge;
     @Nullable
     private Gender userGender;
@@ -23,9 +25,10 @@ public class OfferWallRequest {
         this.userId = userId;
     }
 
-    public OfferWallRequest(@NonNull String userId, @Nullable String zipCode, @Nullable Integer userAge, @Nullable Gender userGender, @Nullable Date userSignupDate, @Nullable String[] callbackParameters) {
+    public OfferWallRequest(@NonNull String userId, @Nullable String zipCode, @Nullable String countryCode, @Nullable Integer userAge, @Nullable Gender userGender, @Nullable Date userSignupDate, @Nullable String[] callbackParameters) {
         this.userId = userId;
         this.zipCode = zipCode;
+        this.countryCode = countryCode;
         this.userAge = userAge;
         this.userGender = userGender;
         this.userSignupDate = userSignupDate;
@@ -46,6 +49,15 @@ public class OfferWallRequest {
 
     public void setZipCode(@Nullable String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    @Nullable
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(@Nullable String countryCode) {
+        this.countryCode = countryCode;
     }
 
     public Integer getUserAge() {

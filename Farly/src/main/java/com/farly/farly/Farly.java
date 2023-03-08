@@ -97,7 +97,11 @@ public class Farly {
                     .append(encodeValue(value));
             prefix = "&";
         }
-        return urlStringBuilder.toString();
+        String finalUrl = urlStringBuilder.toString();
+
+        Log.d(LOG_TAG, "Using offerwal url " + finalUrl);
+
+        return finalUrl;
     }
 
     /**
@@ -257,8 +261,25 @@ public class Farly {
         queryParams.put("devicemodel", Build.MODEL);
         queryParams.put("os_version", Build.VERSION.RELEASE);
         queryParams.put("is_tablet", DeviceUtils.isTablet(context) ? "1" : "0");
-        queryParams.put("country", Locale.getDefault().getCountry());
-        queryParams.put("locale", Locale.getDefault().getLanguage().startsWith("fr") ? "fr" : "en");
+        String country = Locale.getDefault().getCountry();
+        String language = Locale.getDefault().getLanguage();
+        Log.d(LOG_TAG, "Default country is " + country);
+        Locale[] availableLocales = Locale.getAvailableLocales();
+        for (Locale availableLocale : availableLocales) {
+            if (!TextUtils.isEmpty(country) && !TextUtils.isEmpty(language)) {
+                break;
+            }
+            if (TextUtils.isEmpty(country)) {
+                country = availableLocale.getCountry();
+                Log.d(LOG_TAG, "Trying locale country " + country);
+            }
+            if (TextUtils.isEmpty(language)) {
+                language = availableLocale.getLanguage();
+            }
+        }
+        Log.d(LOG_TAG, "Used country is " + country);
+        queryParams.put("country", country);
+        queryParams.put("locale", language.startsWith("fr") ? "fr" : "en");
 
         queryParams.put("userid", request.getUserId());
         queryParams.put("zip", request.getZipCode());

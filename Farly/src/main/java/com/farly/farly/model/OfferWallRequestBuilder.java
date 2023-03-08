@@ -11,6 +11,8 @@ public class OfferWallRequestBuilder {
     @Nullable
     private String zipCode;
     @Nullable
+    private String countryCode;
+    @Nullable
     private Integer userAge;
     @Nullable
     private Gender userGender;
@@ -49,7 +51,12 @@ public class OfferWallRequestBuilder {
         return this;
     }
 
+    public OfferWallRequestBuilder setCountryCode(@Nullable String countryCode) {
+        this.countryCode = countryCode;
+        return this;
+    }
+
     public OfferWallRequest build() {
-        return new OfferWallRequest(userId, zipCode, userAge, userGender, userSignupDate, callbackParameters);
+        return new OfferWallRequest(userId, zipCode, countryCode, userAge, userGender, userSignupDate, callbackParameters);
     }
 }
