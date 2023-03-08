@@ -261,7 +261,10 @@ public class Farly {
         queryParams.put("devicemodel", Build.MODEL);
         queryParams.put("os_version", Build.VERSION.RELEASE);
         queryParams.put("is_tablet", DeviceUtils.isTablet(context) ? "1" : "0");
-        String country = Locale.getDefault().getCountry();
+        String country = request.getCountryCode();
+        if (TextUtils.isEmpty(country)) {
+            country = Locale.getDefault().getCountry();
+        }
         String language = Locale.getDefault().getLanguage();
         Log.d(LOG_TAG, "Default country is " + country);
         Locale[] availableLocales = Locale.getAvailableLocales();
