@@ -261,27 +261,17 @@ public class Farly {
         queryParams.put("devicemodel", Build.MODEL);
         queryParams.put("os_version", Build.VERSION.RELEASE);
         queryParams.put("is_tablet", DeviceUtils.isTablet(context) ? "1" : "0");
-        String country = request.getCountryCode();
-        if (TextUtils.isEmpty(country)) {
-            country = Locale.getDefault().getCountry();
-        }
         String language = Locale.getDefault().getLanguage();
-        Log.d(LOG_TAG, "Default country is " + country);
         Locale[] availableLocales = Locale.getAvailableLocales();
-        for (Locale availableLocale : availableLocales) {
-            if (!TextUtils.isEmpty(country) && !TextUtils.isEmpty(language)) {
-                break;
-            }
-            if (TextUtils.isEmpty(country)) {
-                country = availableLocale.getCountry();
-                Log.d(LOG_TAG, "Trying locale country " + country);
-            }
-            if (TextUtils.isEmpty(language)) {
+        if (TextUtils.isEmpty(language)) {
+            for (Locale availableLocale : availableLocales) {
+                if (!TextUtils.isEmpty(language)) {
+                    break;
+                }
                 language = availableLocale.getLanguage();
             }
         }
-        Log.d(LOG_TAG, "Used country is " + country);
-        queryParams.put("country", country);
+        queryParams.put("country", request.getCountryCode());
         queryParams.put("locale", language.startsWith("fr") ? "fr" : "en");
 
         queryParams.put("userid", request.getUserId());
