@@ -36,7 +36,6 @@ public class Farly {
     private final static Farly instance = new Farly();
     public static final String LOG_TAG = "Farly";
 
-    private String apiKey;
     private String apiDomain = "www.farly.io";
     private String offerwallDomain = "offerwall.farly.io";
     private String publisherId;
@@ -49,9 +48,6 @@ public class Farly {
     }
 
     private void checkConfig() throws Exception {
-        if (TextUtils.isEmpty(apiKey)) {
-            throw new Exception("Farly: missing apiKey");
-        }
         if (TextUtils.isEmpty(apiDomain)) {
             throw new Exception("Farly: missing apiDomain");
         }
@@ -253,10 +249,6 @@ public class Farly {
         Map<String, String> queryParams = new HashMap<>();
         queryParams.put("pubid", this.publisherId);
 
-        int timestamp = Math.round(new Date().getTime() / 1000f);
-        queryParams.put("timestamp", timestamp + "");
-        queryParams.put("hash", AeSimpleSHA1.SHA1(timestamp + this.apiKey));
-
         queryParams.put("device", "android");
         queryParams.put("devicemodel", Build.MODEL);
         queryParams.put("os_version", Build.VERSION.RELEASE);
@@ -327,12 +319,6 @@ public class Farly {
     }
 
     // getters and setters
-
-    @SuppressWarnings("UnusedReturnValue")
-    public Farly setApiKey(String apiKey) {
-        this.apiKey = apiKey;
-        return this;
-    }
 
     @SuppressWarnings("UnusedReturnValue")
     public Farly setPublisherId(String publisherId) {

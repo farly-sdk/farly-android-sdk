@@ -8,7 +8,7 @@
 ## Example
 
 To run the example project, clone the repo, and open the project in Android Studio, then launch the MainActivity. 
-Inject your API Key and Publisher ID in `MainActivity.java`.
+Inject your Publisher ID in `MainActivity.java`.
 
 ## Installation
 

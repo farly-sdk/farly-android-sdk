@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Farly.getInstance()
-                .setApiKey("API_KEY")
                 .setPublisherId("PUB_ID");
 
         this.request = new OfferWallRequestBuilder()
