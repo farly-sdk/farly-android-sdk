@@ -4,7 +4,7 @@
 
 ## Full Documentation
 
-[Access the full documentation here >](https://mobsuccess.notion.site/Farly-Android-SDK-64c9efa6b34e4c9d8e1f3869dfe484b4)
+[Access the full documentation here >](https://mobsuccess-group.notion.site/Farly-Android-SDK-2e2d618310758193b573d49573896aa9)
 ## Example
 
 To run the example project, clone the repo, and open the project in Android Studio, then launch the MainActivity. 
